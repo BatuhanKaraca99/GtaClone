@@ -11,6 +11,7 @@ public class PlayerScript : MonoBehaviour
     [Header("Player Animator & Gravity")]
     public CharacterController cC;
     public float gravity = -9.81f;
+    public Animator animator;
 
     [Header("Player Script Camera")]
     public Transform playerCamera;
@@ -52,12 +53,25 @@ public class PlayerScript : MonoBehaviour
 
         if(direction.magnitude >= 0.1f)
         {
+            animator.SetBool("Idle", false);
+            animator.SetBool("Walk", true);
+            animator.SetBool("Running", false);
+
             float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + playerCamera.eulerAngles.y;
             float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnCalmTime, turnCalmTime);
             transform.rotation = Quaternion.Euler(0f, angle, 0f);
 
             Vector3 moveDirection = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
             cC.Move(moveDirection * playerSpeed * Time.deltaTime);
+            jumpRange = 0f;
+        }
+
+        else
+        {
+            animator.SetBool("Walk", false);
+            animator.SetBool("Running", false);
+            animator.SetBool("Idle", true);
+            jumpRange = 1f;
         }
     }
 
@@ -65,7 +79,15 @@ public class PlayerScript : MonoBehaviour
     {
         if(Input.GetButtonDown("Jump") && onSurface)
         {
+            animator.SetBool("Idle", false);
+            animator.SetTrigger("Jump");
+
             velocity.y = Mathf.Sqrt(jumpRange * -2 * gravity);
+        }
+
+        else
+        {
+            animator.ResetTrigger("Jump");
         }
     }
 
@@ -80,13 +102,23 @@ public class PlayerScript : MonoBehaviour
 
             if (direction.magnitude >= 0.1f)
             {
+                animator.SetBool("Walk", false);
+                animator.SetBool("Running", true);
+
                 float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + playerCamera.eulerAngles.y;
                 float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnCalmTime, turnCalmTime);
                 transform.rotation = Quaternion.Euler(0f, angle, 0f);
 
                 Vector3 moveDirection = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
                 cC.Move(moveDirection * playerSprint * Time.deltaTime);
+                jumpRange = 0f;
             }
+        }
+
+        else
+        {
+            animator.SetBool("Running", false);
+            jumpRange = 1f;
         }
     }
 
