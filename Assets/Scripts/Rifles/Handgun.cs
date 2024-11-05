@@ -190,8 +190,6 @@ public class Handgun : MonoBehaviour
         }
     }
 
-
-
     void Shoot()
     {
         if(mag == 0)
