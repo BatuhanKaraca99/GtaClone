@@ -5,6 +5,10 @@ TagManager:
   serializedVersion: 2
   tags:
   - Surface
+  - HandGunPickup
+  - ShotGunPickup
+  - UziPickup
+  - BazookaPickup
   layers:
   - Default
   - TransparentFX
