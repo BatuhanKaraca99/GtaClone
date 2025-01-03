@@ -12,6 +12,7 @@ public class PickupItem : MonoBehaviour
 
     [Header("Player Info")]
     public Player player;
+    public Inventory inventory;
 
     private void Start()
     {
@@ -36,24 +37,32 @@ public class PickupItem : MonoBehaviour
                     {
                         player.playerMoney -= itemPrice;
 
+                        inventory.Weapon1.SetActive(true);
+                        inventory.isWeapon1Picked = true;
                         Debug.Log(itemTag);
                     }
                     else if (itemTag == "ShotGunPickup")
                     {
                         player.playerMoney -= itemPrice;
 
+                        inventory.Weapon2.SetActive(true);
+                        inventory.isWeapon2Picked = true;
                         Debug.Log(itemTag);
                     }
                     else if (itemTag == "UziPickup")
                     {
                         player.playerMoney -= itemPrice;
 
+                        inventory.Weapon3.SetActive(true);
+                        inventory.isWeapon3Picked = true;
                         Debug.Log(itemTag);
                     }
                     else if (itemTag == "BazookaPickup")
                     {
                         player.playerMoney -= itemPrice;
 
+                        inventory.Weapon4.SetActive(true);
+                        inventory.isWeapon4Picked = true;
                         Debug.Log(itemTag);
                     }
                     ItemToPick.SetActive(false);
