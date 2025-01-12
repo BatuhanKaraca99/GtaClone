@@ -54,6 +54,7 @@ public class Uzi : MonoBehaviour
 
     [Header("Sounds & UI")]
     public GameObject ammoOutUI;
+    bool UZIActive = true;
 
     private void Awake()
     {
@@ -64,6 +65,10 @@ public class Uzi : MonoBehaviour
 
     private void Update()
     {
+        if (UZIActive == true)
+        {
+            animator.runtimeAnimatorController = Resources.Load<RuntimeAnimatorController>("UziAnimator");
+        }
 
         onSurface = Physics.CheckSphere(surfaceCheck.position, surfaceDistance, surfaceMask);
 

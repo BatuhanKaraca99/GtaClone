@@ -25,9 +25,20 @@ public class PlayerScript : MonoBehaviour
     bool onSurface;
     public float surfaceDistance = 0.4f;
     public LayerMask surfaceMask;
+    bool PlayerActive = true;
+
+    private void Awake()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+    }
 
     private void Update()
     {
+        if (PlayerActive == true)
+        {
+            animator.runtimeAnimatorController = Resources.Load<RuntimeAnimatorController>("PlayerController");
+        }
+
         onSurface = Physics.CheckSphere(surfaceCheck.position, surfaceDistance, surfaceMask);
         
         if(onSurface && velocity.y < 0)

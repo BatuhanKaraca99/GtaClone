@@ -53,6 +53,7 @@ public class Bazooka : MonoBehaviour
 
     [Header("Sounds & UI")]
     public GameObject ammoOutUI;
+    bool BazookaActive = true;
 
     private void Awake()
     {
@@ -63,6 +64,10 @@ public class Bazooka : MonoBehaviour
 
     private void Update()
     {
+        if (BazookaActive == true)
+        {
+            animator.runtimeAnimatorController = Resources.Load<RuntimeAnimatorController>("BazookaAnimator");
+        }
 
         onSurface = Physics.CheckSphere(surfaceCheck.position, surfaceDistance, surfaceMask);
 

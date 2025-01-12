@@ -54,6 +54,7 @@ public class Handgun : MonoBehaviour
 
     [Header("Sounds & UI")]
     public GameObject ammoOutUI;
+    bool HandgunActive = true;
 
     private void Awake()
     {
@@ -64,6 +65,10 @@ public class Handgun : MonoBehaviour
 
     private void Update()
     {
+        if(HandgunActive == true)
+        {
+            animator.runtimeAnimatorController = Resources.Load<RuntimeAnimatorController>("GunAnimator");
+        }
 
         onSurface = Physics.CheckSphere(surfaceCheck.position, surfaceDistance, surfaceMask);
 

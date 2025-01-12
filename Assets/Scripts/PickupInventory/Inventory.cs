@@ -42,6 +42,10 @@ public class Inventory : MonoBehaviour
     public GameObject inventoryPanel;
     bool isPause = false;
 
+    public SwitchCamera switchCamera;
+    public GameObject AimCam;
+    public GameObject ThirdPersonCam;
+
     private void Update()
     {
         if (Input.GetKeyDown("1") && isWeapon1Picked == true)
@@ -76,6 +80,17 @@ public class Inventory : MonoBehaviour
             isWeapon4Active = true;
             isRiflesActive();
         }
+        else if (Input.GetKeyDown("tab"))
+        {
+            if (isPause)
+            {
+                hideInventory();
+            }
+            else
+            {
+                showInventory();
+            }
+        }  
     }
 
     void isRiflesActive()
@@ -149,4 +164,25 @@ public class Inventory : MonoBehaviour
             bazooka.GetComponent<Bazooka>().enabled = true;
         }
     }
+
+    void showInventory()
+    {
+        switchCamera.GetComponent<SwitchCamera>().enabled = false;
+        ThirdPersonCam.SetActive(false);
+        AimCam.SetActive(false);
+
+        inventoryPanel.SetActive(true);
+        Time.timeScale = 0f;
+        isPause = true;
+    }
+
+    void hideInventory()
+    {
+        switchCamera.GetComponent<SwitchCamera>().enabled = true;
+        ThirdPersonCam.SetActive(true);
+        AimCam.SetActive(true);
+
+        inventoryPanel.SetActive(false);
+        Time.timeScale = 1f;
+        isPause = false;}
 }

@@ -53,6 +53,7 @@ public class Shotgun : MonoBehaviour
 
     [Header("Sounds & UI")]
     public GameObject ammoOutUI;
+    bool ShotgunActive = true;
 
     private void Awake()
     {
@@ -63,6 +64,10 @@ public class Shotgun : MonoBehaviour
 
     private void Update()
     {
+        if (ShotgunActive == true)
+        {
+            animator.runtimeAnimatorController = Resources.Load<RuntimeAnimatorController>("ShotgunAnimator");
+        }
 
         onSurface = Physics.CheckSphere(surfaceCheck.position, surfaceDistance, surfaceMask);
 
