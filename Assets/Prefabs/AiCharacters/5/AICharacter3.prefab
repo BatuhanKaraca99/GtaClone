@@ -204,6 +204,7 @@ GameObject:
   - component: {fileID: 643226674155026509}
   - component: {fileID: 5369388406187437552}
   - component: {fileID: 4787746414294415212}
+  - component: {fileID: 1263741779863009453}
   m_Layer: 0
   m_Name: AICharacter3
   m_TagString: Untagged
@@ -317,6 +318,27 @@ CapsuleCollider:
   m_Height: 1.7
   m_Direction: 1
   m_Center: {x: 0, y: 1, z: 0}
+--- !u!95 &1263741779863009453
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 732170662377747630}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 37c78644be9a95242bcdc8ec714dd214, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1072065818595762929
 GameObject:
   m_ObjectHideFlags: 0
