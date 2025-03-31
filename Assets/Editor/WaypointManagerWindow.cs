@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
+using PlasticPipe.PlasticProtocol.Messages;
 
 public class WaypointManagerWindow : EditorWindow
 {
@@ -48,6 +49,10 @@ public class WaypointManagerWindow : EditorWindow
             if (GUILayout.Button("Create Waypoint After"))
             {
                 CreateWaypointAfter();
+            }
+            if(GUILayout.Button("Add Branch Waypoint"))
+            {
+                CreateBranch();
             }
             if (GUILayout.Button("Remove Waypoint"))
             {
@@ -121,6 +126,21 @@ public class WaypointManagerWindow : EditorWindow
 
         newWaypoint.transform.SetSiblingIndex(selectedWaypoint.transform.GetSiblingIndex());
         Selection.activeGameObject = newWaypoint.gameObject;
+    }
+
+    void CreateBranch()
+    {
+        GameObject waypointObject = new GameObject("Waypoint " + waypointOrigin.childCount, typeof(Waypoint));
+        waypointObject.transform.SetParent(waypointOrigin, false);
+
+        Waypoint waypoint = waypointObject.GetComponent<Waypoint>();
+        Waypoint branchedFrom = Selection.activeGameObject.GetComponent<Waypoint>();
+        branchedFrom.branches.Add(waypoint);
+
+        waypoint.transform.position = branchedFrom.transform.position;
+        waypoint.transform.forward = branchedFrom.transform.forward;
+
+        Selection.activeGameObject = waypoint.gameObject;
     }
 
     void RemoveWaypoint()
