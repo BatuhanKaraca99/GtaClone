@@ -6,4 +6,6 @@ public class Player : MonoBehaviour
 {
     [Header("Player Money")]
     public int playerMoney;
+    public int currentkills;
+
 }
