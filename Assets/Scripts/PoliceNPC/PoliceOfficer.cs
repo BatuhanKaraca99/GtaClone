@@ -16,6 +16,7 @@ public class PoliceOfficer : MonoBehaviour
     public bool destinationReached;
 
     [Header("Police AI")]
+    public GameObject playerBody;
     public LayerMask playerLayer;
     public float visionRadius;
     public float shootingRadius;
@@ -27,6 +28,7 @@ public class PoliceOfficer : MonoBehaviour
 
     private void Start()
     {
+        playerBody = GameObject.Find("Player");
         wantedLevelScript = GameObject.FindObjectOfType<WantedLevel>();
         CurrentMovingSpeed = movingSpeed;
     }
@@ -41,6 +43,12 @@ public class PoliceOfficer : MonoBehaviour
         || wantedLevelScript.level4 == false || wantedLevelScript.level5 == false)
         {
             Walk();
+        }
+        if(playerInvisionRadius && !playerInshootingRadius && wantedLevelScript.level1 == true
+        || wantedLevelScript.level2 == true || wantedLevelScript.level3 == true
+        || wantedLevelScript.level4 == true || wantedLevelScript.level5 == true)
+        {
+            ChasePlayer();
         }
     }
     
@@ -73,5 +81,13 @@ public class PoliceOfficer : MonoBehaviour
     {
         this.destination = destination;
         destinationReached = false;
+    }
+
+    public void ChasePlayer()
+    {
+        transform.position += transform.forward * CurrentMovingSpeed * Time.deltaTime;
+        transform.LookAt(playerBody.transform);
+
+        CurrentMovingSpeed = runningSpeed;
     }
 }
