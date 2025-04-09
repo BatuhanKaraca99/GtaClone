@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.PackageManager;
 using UnityEngine;
 
 public class PoliceOfficer : MonoBehaviour
@@ -10,6 +11,8 @@ public class PoliceOfficer : MonoBehaviour
     private float CurrentMovingSpeed;
     public float turningSpeed = 300f;
     public float stopSpeed = 1f;
+    private float characterHealth = 100f;
+    public float presentHealth;
 
     [Header("Destination Var")]
     public Vector3 destination;
@@ -33,10 +36,12 @@ public class PoliceOfficer : MonoBehaviour
 
     public WantedLevel wantedLevelScript;
     public Player player;
+    public GameObject bloodEffect;
 
     private void Start()
     {
         playerBody = GameObject.Find("Player");
+        presentHealth = characterHealth;
         wantedLevelScript = GameObject.FindObjectOfType<WantedLevel>();
         CurrentMovingSpeed = movingSpeed;
         player = GameObject.FindObjectOfType<Player>();
@@ -136,6 +141,8 @@ public class PoliceOfficer : MonoBehaviour
                 if (playerBody != null)
                 {
                     playerBody.playerHitDamage(giveDamageOf);
+                    GameObject bloodEffectGo = Instantiate(bloodEffect, hit.point, Quaternion.LookRotation(hit.normal));
+                    Destroy(bloodEffectGo, 1f);
                 }
             }
         }
@@ -147,5 +154,21 @@ public class PoliceOfficer : MonoBehaviour
     private void ActiveShooting()
     {
         previouslyShoot = false;
+    }
+
+    public void characterHitDamage(float takeDamage)
+    {
+        presentHealth -= takeDamage;
+
+        if (presentHealth <= 0f)
+        {
+            animator.SetBool("Die", true);
+            characterDie();
+        }
+    }
+
+    private void characterDie()
+    {
+        Object.Destroy(gameObject, 4.0f);
     }
 }

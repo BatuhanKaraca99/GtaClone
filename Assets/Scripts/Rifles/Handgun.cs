@@ -51,6 +51,7 @@ public class Handgun : MonoBehaviour
     [Header("Rifle Effects")]
     public ParticleSystem muzzleSpark;
     public GameObject metalEffect;
+    public GameObject bloodEffect;
 
     [Header("Sounds & UI")]
     public GameObject ammoOutUI;
@@ -219,12 +220,19 @@ public class Handgun : MonoBehaviour
             Debug.Log(hitInfo.transform.name);
 
             Object obj = hitInfo.transform.GetComponent<Object>();
+            PoliceOfficer policeOfficer = hitInfo.transform.GetComponent<PoliceOfficer>();
 
             if (obj != null) 
             {
                 obj.objectHitDamage(giveDamage);
                 GameObject metalEffectGo = Instantiate(metalEffect, hitInfo.point,Quaternion.LookRotation(hitInfo.normal));
                 Destroy(metalEffectGo, 1f);
+            }
+            else if(policeOfficer != null)
+            {
+                policeOfficer.characterHitDamage(giveDamage);
+                GameObject bloodEffectGo = Instantiate(bloodEffect, hitInfo.point, Quaternion.LookRotation(hitInfo.normal));
+                Destroy(bloodEffectGo, 1f);
             }
         }
     }
