@@ -14,6 +14,7 @@ public class PoliceOfficer : MonoBehaviour
     [Header("Destination Var")]
     public Vector3 destination;
     public bool destinationReached;
+    public Animator animator;
 
     [Header("Police AI")]
     public GameObject playerBody;
@@ -46,21 +47,21 @@ public class PoliceOfficer : MonoBehaviour
         playerInvisionRadius = Physics.CheckSphere(transform.position, visionRadius, playerLayer);
         playerInshootingRadius = Physics.CheckSphere(transform.position, shootingRadius, playerLayer);
     
-        if(!playerInvisionRadius && !playerInshootingRadius && wantedLevelScript.level1 == false
+        if(!playerInvisionRadius && !playerInshootingRadius && (wantedLevelScript.level1 == false
         || wantedLevelScript.level2 == false || wantedLevelScript.level3 == false
-        || wantedLevelScript.level4 == false || wantedLevelScript.level5 == false)
+        || wantedLevelScript.level4 == false || wantedLevelScript.level5 == false))
         {
             Walk();
         }
-        if(playerInvisionRadius && !playerInshootingRadius && wantedLevelScript.level1 == true
+        if(playerInvisionRadius && !playerInshootingRadius && (wantedLevelScript.level1 == true
         || wantedLevelScript.level2 == true || wantedLevelScript.level3 == true
-        || wantedLevelScript.level4 == true || wantedLevelScript.level5 == true)
+        || wantedLevelScript.level4 == true || wantedLevelScript.level5 == true))
         {
             ChasePlayer();
         }
-        if(playerInvisionRadius && playerInshootingRadius && wantedLevelScript.level1 == true
+        if(playerInvisionRadius && playerInshootingRadius && (wantedLevelScript.level1 == true
         || wantedLevelScript.level2 == true || wantedLevelScript.level3 == true
-        || wantedLevelScript.level4 == true || wantedLevelScript.level5 == true)
+        || wantedLevelScript.level4 == true || wantedLevelScript.level5 == true))
         {
             ShootPlayer();
         }
@@ -83,6 +84,10 @@ public class PoliceOfficer : MonoBehaviour
 
                 //Move AI
                 transform.Translate(Vector3.forward * movingSpeed * Time.deltaTime);
+
+                animator.SetBool("Walk", true);
+                animator.SetBool("Shoot", false);
+                animator.SetBool("Run", false);
             }
             else
             {
@@ -102,6 +107,10 @@ public class PoliceOfficer : MonoBehaviour
         transform.position += transform.forward * CurrentMovingSpeed * Time.deltaTime;
         transform.LookAt(playerBody.transform);
 
+        animator.SetBool("Walk", false);
+        animator.SetBool("Shoot", false);
+        animator.SetBool("Run", true);
+
         CurrentMovingSpeed = runningSpeed;
     }
 
@@ -110,6 +119,10 @@ public class PoliceOfficer : MonoBehaviour
         CurrentMovingSpeed = 0f;
 
         transform.LookAt(playerBody.transform);
+
+        animator.SetBool("Walk", false);
+        animator.SetBool("Shoot", true);
+        animator.SetBool("Run", false);
 
         if (!previouslyShoot)
         {
