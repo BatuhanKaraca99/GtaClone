@@ -8,10 +8,18 @@ public class CharacterNavigatorScript : MonoBehaviour
     public float movingSpeed;
     public float turningSpeed = 300f;
     public float stopSpeed = 1f;
+    private float characterHealth = 100f;
+    public float presentHealth;
 
     [Header("Destination Var")]
     public Vector3 destination;
     public bool destinationReached;
+    public Animator animator;
+
+    private void Awake()
+    {
+        animator = GetComponent<Animator>();
+    }
 
     private void Update()
     {
@@ -47,5 +55,22 @@ public class CharacterNavigatorScript : MonoBehaviour
     {
         this.destination = destination;
         destinationReached = false;
+    }
+
+    public void characterHitDamage(float takeDamage)
+    {
+        presentHealth -= takeDamage;
+
+        if (presentHealth <= 0f)
+        {
+            animator.SetBool("Die", true);
+            characterDie();
+        }
+    }
+
+    private void characterDie()
+    {
+        movingSpeed = 0f;
+        Object.Destroy(gameObject, 4.0f);
     }
 }
