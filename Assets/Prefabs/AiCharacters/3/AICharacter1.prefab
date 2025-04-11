@@ -1044,8 +1044,10 @@ MonoBehaviour:
   movingSpeed: 1.4
   turningSpeed: 300
   stopSpeed: 1
+  presentHealth: 0
   destination: {x: 0, y: 0, z: 0}
   destinationReached: 0
+  animator: {fileID: 5606171621367695328}
 --- !u!114 &8803814329609187501
 MonoBehaviour:
   m_ObjectHideFlags: 0

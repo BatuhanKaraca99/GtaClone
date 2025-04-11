@@ -15,6 +15,7 @@ public class CharacterNavigatorScript : MonoBehaviour
     public Vector3 destination;
     public bool destinationReached;
     public Animator animator;
+    public Player player;
 
     private void Awake()
     {
@@ -24,6 +25,7 @@ public class CharacterNavigatorScript : MonoBehaviour
     private void Update()
     {
         Walk();
+        player = GameObject.FindObjectOfType<Player>();
     }
 
     public void Walk()
@@ -71,6 +73,8 @@ public class CharacterNavigatorScript : MonoBehaviour
     private void characterDie()
     {
         movingSpeed = 0f;
+        gameObject.GetComponent<CapsuleCollider>().enabled = false;
         Object.Destroy(gameObject, 4.0f);
+        player.currentkills += 1;
     }
 }
