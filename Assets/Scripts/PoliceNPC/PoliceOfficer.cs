@@ -169,8 +169,11 @@ public class PoliceOfficer : MonoBehaviour
 
     private void characterDie()
     {
+        gameObject.GetComponent<CapsuleCollider>().enabled = false;
         CurrentMovingSpeed = 0f;
         shootingRange = 0f;
         Object.Destroy(gameObject, 4.0f);
+        player.currentkills += 1;
+        player.playerMoney += 10;
     }
 }

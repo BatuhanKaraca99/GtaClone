@@ -76,5 +76,6 @@ public class CharacterNavigatorScript : MonoBehaviour
         gameObject.GetComponent<CapsuleCollider>().enabled = false;
         Object.Destroy(gameObject, 4.0f);
         player.currentkills += 1;
+        player.playerMoney += 5;
     }
 }
