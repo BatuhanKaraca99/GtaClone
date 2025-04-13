@@ -223,6 +223,7 @@ public class Handgun : MonoBehaviour
             PoliceOfficer policeOfficer = hitInfo.transform.GetComponent<PoliceOfficer>();
             CharacterNavigatorScript characterNavigatorScript = hitInfo.transform.GetComponent<CharacterNavigatorScript>();
             PoliceOfficer2 policeOfficer2 = hitInfo.transform.GetComponent<PoliceOfficer2>();
+            FBIOfficer fbiOfficer = hitInfo.transform.GetComponent<FBIOfficer>();
 
             if (obj != null) 
             {
@@ -245,6 +246,12 @@ public class Handgun : MonoBehaviour
             else if (policeOfficer2 != null)
             {
                 policeOfficer2.characterHitDamage(giveDamage);
+                GameObject bloodEffectGo = Instantiate(bloodEffect, hitInfo.point, Quaternion.LookRotation(hitInfo.normal));
+                Destroy(bloodEffectGo, 1f);
+            }
+            else if (fbiOfficer != null)
+            {
+                fbiOfficer.characterHitDamage(giveDamage);
                 GameObject bloodEffectGo = Instantiate(bloodEffect, hitInfo.point, Quaternion.LookRotation(hitInfo.normal));
                 Destroy(bloodEffectGo, 1f);
             }

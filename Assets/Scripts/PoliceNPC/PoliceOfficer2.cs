@@ -119,7 +119,6 @@ public class PoliceOfficer2 : MonoBehaviour
     public void ShootPlayer()
     {
         CurrentMovingSpeed = 0f;
-
         transform.LookAt(playerBody.transform);
 
         animator.SetBool("Walk", false);
