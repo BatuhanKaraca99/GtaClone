@@ -206,6 +206,10 @@ public class Shotgun : MonoBehaviour
             mag--;
         }
 
+        //Update UI
+        AmmoCount.instance.UpdateAmmoText(presentAmmunition);
+        AmmoCount.instance.UpdateMagText(mag);
+
         muzzleSpark.Play();
         RaycastHit hitInfo;
 
