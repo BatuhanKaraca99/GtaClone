@@ -1,2 +1,4 @@
 # Auto detect text files and perform LF normalization
 * text=auto
+Assets/Prefabs/GangsterHouse.fbx filter=lfs diff=lfs merge=lfs -text
+Assets/Prefabs/PlayerHouse.fbx filter=lfs diff=lfs merge=lfs -text
