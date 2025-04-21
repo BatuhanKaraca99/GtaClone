@@ -2,7 +2,7 @@ Staj 3+Ekstra<br>
 Büyük dosyalar için "git lfs migrate import" kullandım.<br>
 WASD yön tuşları. F ile silah alanına girince satın alıyor.Otomatik bitince şarjör dolduruyor.Karakolda kapı açma gibi özellikler var. Aranma sistemi var.<br>
 Gta Clone<br><br>
-**Youtube Video:** https://youtu.be/GOowNxHL5x4 <br>
+**Youtube Video:** https://youtu.be/GOowNxHL5x4 <br><br>
 **Images**<br>
 ![3](https://github.com/user-attachments/assets/e509c866-cab5-4124-9476-39fe6265f448)
 ![23](https://github.com/user-attachments/assets/0059b582-8234-4d48-8fa2-6387a82d6dec)
